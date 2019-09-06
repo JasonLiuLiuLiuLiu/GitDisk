@@ -80,7 +80,21 @@
 
 现在我们用上面的步骤,把照成翻车的83459338转成内存存储形式看看.  
 
+![double](https://raw.githubusercontent.com/liuzhenyulive/GitDisk/blogs/pic/DoubleToFloat/floatTest.png)  
 
+通过在线工具转换后证实我们的转换完全正确.
 
-http://www.ruanyifeng.com/blog/2010/06/ieee_floating-point_representation.html
-https://www.h-schmidt.net/FloatConverter/IEEE754.html
+![double](https://raw.githubusercontent.com/liuzhenyulive/GitDisk/blogs/pic/DoubleToFloat/floatTestResult.png)  
+
+然后我们再把数据转回来.  
+
+![float](https://raw.githubusercontent.com/liuzhenyulive/GitDisk/blogs/pic/DoubleToFloat/official.png)  
+
+S是第31位,为0, E =`0011001`(25)+1=26, 重点在M,它是1.(`有效数字位`)即 `1.00111110010111110100001`
+
+`1.00111110010111110100001`乘上2的26次方,为`100111110010111110100001000`,将其转换为十进制,为 `83459336`   
+
+没错,就是`83459336`,而不是`83459338`, 心态炸裂 💣💣💣🌋  
+83459338=> `100111110010111110100001010`  
+83459336=> `100111110010111110100001000`  
+可以看到,两个数字转成成二进制后,倒数第二位产生了差异,而这里的差异就是单精度浮点数小数位23位不足以存储所有二进制数造成的,这场事故告诉我们,强转虽好,容易翻车,希望你看懂了这篇文章后不会发生此类事故.
