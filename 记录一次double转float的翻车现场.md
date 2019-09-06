@@ -69,11 +69,16 @@
 
 我们先用上述步骤尝试把9.0转化成二进制存储形式.
 
-![double](https://raw.githubusercontent.com/liuzhenyulive/GitDisk/blogs/pic/DoubleToFloat/float9.0.jpg)  
+![double](https://raw.githubusercontent.com/liuzhenyulive/GitDisk/blogs/pic/DoubleToFloat/float9.0.png)  
 
 我们可以通过这个地址校验计算结果的正确性.  https://www.h-schmidt.net/FloatConverter/IEEE754.html  
 可以看到,与我们的计算结果完全一致.  
 
+![double](https://raw.githubusercontent.com/liuzhenyulive/GitDisk/blogs/pic/DoubleToFloat/float9.0Result.png)
+
+# 翻车分析  
+
+现在我们用上面的步骤,把照成翻车的83459338转成内存存储形式看看.  
 
 
 
