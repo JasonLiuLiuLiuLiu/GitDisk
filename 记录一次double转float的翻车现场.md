@@ -1,9 +1,9 @@
 # 背景  
 
 人逢喜事精神爽,总算熬到下班撩~~  
-正准备和同事打个招呼回家,被同事拖住问了个问题: 你们组做的那块代码,把double类型数据成float有问题啊,我的数据存了后再取出来就不对了💨.
-我: 嗯?不对是正常啊,float精度是没有double高,但float能保存到小数点后好多位,对我们来说完全够用了!
-同事: 不是啊,这不是小数点多少位的问题,而是现在整型数据,转出来也有问题啊,你看.
+正准备和同事打个招呼回家,被同事拖住问了个问题: 你们组做的那块代码,把double类型数据成float有问题啊,我的数据存了后再取出来就不对了💨.  
+我: 嗯?不对是正常啊,float精度是没有double高,但float能保存到小数点后好多位,对我们来说完全够用了!  
+同事: 不是啊,这不是小数点多少位的问题,而是现在整型数据,转出来也有问题啊,你看.  
 
 ![翻车](https://raw.githubusercontent.com/liuzhenyulive/GitDisk/blogs/pic/DoubleToFloat/DoubleToFloat.png)  
 
@@ -48,11 +48,17 @@
 
 对于64位的`双精度`浮点数，最高的1位是符号位S，接着的11位是指数E，剩下的52位为有效数字M。
 
-![double](https://raw.githubusercontent.com/liuzhenyulive/GitDisk/blogs/pic/DoubleToFloat/double.jpg)
+![double](https://raw.githubusercontent.com/liuzhenyulive/GitDisk/blogs/pic/DoubleToFloat/double.jpg)  
+
+经过上面关于浮点数的介绍,相信你可能还是一头雾水,就像下面这幅漫画展示的那样.
+
+![double](https://raw.githubusercontent.com/liuzhenyulive/GitDisk/blogs/pic/DoubleToFloat/horse.png)  
+
+
 
 ## 浮点数转成内存存储
 
-看到了上面的两幅图后,我看看看浮点数据具体怎么在内存中存储的,双精度与单精度类似,这里我以单精度为例:
+为了避免产生上面那种画马的跳跃,我们一小步一小步,看看浮点数据具体怎么在内存中存储的.双精度与单精度类似,这里我以单精度为例.
 
 1. 先将这个实数的绝对值化为二进制格式。 
 2. 将这个二进制格式实数的小数点左移或右移n位，直到小数点移动到第一个有效数字的右边。 
@@ -60,6 +66,14 @@
 4. 如果实数是正的，则在第31位放入“0”，否则放入“1”。 
 5. ⭐如果n 是左移得到的，说明指数是正的，第30位放入“1”。如果n是右移得到的或n=0，则第30位放入“0”。 
 6. 如果n是左移得到的，则将n减去1后化为二进制，并在左边加“0”补足七位，放入第29到第23位。如果n是右移得到的或n=0，则将n化为二进制后在左边加“0”补足七位，再各位求反，再放入第29到第23位。
+
+我们先用上述步骤尝试把9.0转化成二进制存储形式.
+
+![double](https://raw.githubusercontent.com/liuzhenyulive/GitDisk/blogs/pic/DoubleToFloat/float9.0.jpg)  
+
+我们可以通过这个地址校验计算结果的正确性.  https://www.h-schmidt.net/FloatConverter/IEEE754.html  
+可以看到,与我们的计算结果完全一致.  
+
 
 
 
