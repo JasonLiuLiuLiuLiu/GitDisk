@@ -132,3 +132,9 @@ https://stackoverflow.com/questions/15093510/whats-c-sharp-threading-type
 
 你以为到了这里就结束了吗?别走,还有.  
 
+## .Net中的线程是如何与内核线程交互的?
+
+首先,既然你都看到了这里,.Net中我们new出来的Thread即用户级别的线程这一点肯定毫无疑问.  
+
+https://github.com/dotnet/coreclr/blob/master/Documentation/botr/threading.md#clr-threading-overview
+
