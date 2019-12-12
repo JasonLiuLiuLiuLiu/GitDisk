@@ -2,67 +2,41 @@
 
 
 
-前两天一觉醒来再次收到一线的Bassam Alugili的信,他整理了第二篇文章介绍C#9的最新特性,希望我能把它翻译成中文,让更多中国开发者知道这些新消息.
+前两天一觉醒来再次收到一线的Bassam Alugili的信,他最近写了第二篇关于C#9的新特性的文章,希望我能把它翻译成中文,让更多中国开发者知道这些新消息.
 
 鄙人不才,英语稍欠火候,这里我对原篇简单翻译,如果感觉都得拗口的可以移步以下链接阅读原文.
 
 https://www.c-sharpcorner.com/article/deev-dive-into-c-sharp-9/
 
-下文提及的这些C＃9功能可以使C＃功能更强大且更实用,阅读此篇文章可以帮助我们为那些必定到来的挑战做好准备,让我们开始吧!  
+下文提及的这些C＃9功能可以使C＃功能更强大且更实用,阅读此篇文章可以帮助我们为那些即将到来的挑战做好准备,让我们开始吧!  
 
 ![](https://disk.iblogs.site/pic/DeepDiveIntoC#9/csharp9Logoversion2.jfif)
 
 
 
-官方计划C# 9 是C#的下一个release版本,你可以点击这个[链接](https://github.com/dotnet/csharplang/projects/4#column-4899858)查看C＃语言版本规划.  
+C# 9 是C#的下一个release版本,当前最新版本为C# 8,你可以点击这个[链接](https://github.com/dotnet/csharplang/projects/4#column-4899858)查看C＃语言版本规划.  
 
 ![](https://disk.iblogs.site/pic/DeepDiveIntoC#9/LanguageVersion Planning.jfif)
 
-如上图所示,在这个列表中一共有34个计划在C# 9中发布的新功能,当然这只是计划.  
+如上图所示,在这个列表中34个计划在C# 9中发布的心功能,当然这只是计划,哪些功能会最终发布，发布在那个版本？恐怕只有.Net开发团队才能回答.  
 
-哪些功能会最终发布，发布在那个版本？恐怕只有.Net开发团队才能回答这些问题,他们拥有最终决定权，并且可以随时更改这些提议的功能以及这些功能的语法,所以这篇文章只对现有计划计划进行分析,具体还是以最终发布为准.  
+在上面的34个新特性中,最重要的可能是`record types`，`potentially discriminated unions`, 下面这篇文章将主要对这两个特性进行详细介绍,也会简单提及其他新特性。
 
+**!!!!! 特别提示!!!!!**
 
-
-为C＃9计划的最重要的功能是记录类型，可能有区别的并集，更多的模式匹配增强以及现有结构（例如三元和空合并表达式）的其他目标类型。
-
- 
-
-在本文中，我将介绍记录联盟和歧视联盟，并简要介绍其他提案。
+ 对于`record types`和`potentially discriminated unions`,目前都不是处于最终阶段,所以还需要做大量工作进行优化,因此本文提及的可能与最终发布的有所出入.
 
  
 
-**!!!!! 重要!!!!!**
+## Record types
 
  
 
-特别是对于唱片联盟和歧视联盟，它们还没有进入最后阶段。他们俩仍然需要大量工作才能从当前的草人建议语法过渡到最终设计。
+其实我等这个特性已经等了很久,Record是是一种更轻量的类型,它可能具有方法,属性,运算符等, 并且允许我们进行相等比较,此外,类型为Record的属性默认情况下为只读,它可以是值类型,也可以是引用类型。
 
- 
+关于这个特性在GitHub的官方介绍 [在这里](https://github.com/dotnet/csharplang/blob/master/proposals/records.md)和[这里](https://github.com/dotnet/csharplang/blob/master/proposals/recordsv2.md).
 
-**记录**
-
- 
-
-我已经等了很久了。记录是轻量型的。它们是名义上的类型，它们可能具有（方法，属性，运算符等），并允许您比较结构相等性！此外，记录属性默认情况下为只读。记录可以是值类型或引用类型。
-
- 
-
-在GitHub上的建议 [在这里](https://github.com/dotnet/csharplang/blob/master/proposals/records.md)。
-
- 
-
-[这里](https://github.com/dotnet/csharplang/blob/master/proposals/recordsv2.md)是最新的记录建议 。
-
- 
-
-*新提案的记录*
-
- 
-
-记录将定义如下，
-
-
+ 根据官方对Record的介绍,它被定义成类似下面这样.
 
 ```c#
 public class Point3D  
